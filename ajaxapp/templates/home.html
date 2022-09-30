@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX
+    </title>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="text-center alert alert-danger">Django with ajax</h2>
+        <div class="row">
+            <div class="col-sm-5">
+                <h4 class="text-center alert alert-info">Add And Update Section</h4>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="stuid" id="stuid">
+                    {{form.as_p}}
+                    <input type="button" class="btn btn-success" id="savebtn" value="Save">
+                </form>
+            </div>
+            <div class="col-sm-7">
+                <h4 class="text-center alert alert-info">Show Student Information</h4>
+                <form action="" id="search-form">
+                    <input type="text" name="search" id="search" class="p-2 w-80" placeholder="You can Search Here">
+                </form>
+                <div class="og-table">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Number</th>
+                                <th scope="col">Adress</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            {% for st in stu %}
+                            <tr>
+                                <td scope="col">{{st.name}}</td>
+                                <td scope="col">{{st.number}}</td>
+                                <td scope="col">{{st.adress}}</td>
+                                <td scope="col"><input type="button" class="btn btn-warning btn-sm btn-edit" data-sid="{{st.id}}"value="Edit">
+                                    <input type="button" class="btn btn-danger btn-sm btn-del" data-sid="{{st.id}}"value="Delete">
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            <p class="no-results" style="display: none;">No Results</p>
+                <div class="table-output">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Number</th>
+                                <th scope="col">Adress</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Development version -->
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+{% include "ajax.html"%}
+</html>

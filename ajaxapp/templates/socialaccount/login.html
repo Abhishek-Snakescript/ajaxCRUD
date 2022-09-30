@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="document.forms['google_login'].submit()">
+    
+<p>You should be redirect to the Google login page in some seconds otherwise use the button below.</p>
+
+
+<form method="post" name= "google_login">
+  {% csrf_token %}
+  <button type="submit">Continue</button>
+</form>
+</body>
+</html>

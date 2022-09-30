@@ -13,8 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from xml.etree.ElementInclude import include
 from django.contrib import admin
-from django.urls import path
+from django.urls import path ,include
 from django.views.decorators.csrf import csrf_exempt
 from ajaxapp import views
 
@@ -24,5 +25,8 @@ urlpatterns = [
     path('save/',views.save,name='save'),
     path('delete/',views.delete,name='delete'),
     path('edit/',views.edit,name='edit'),
-    path('search/',csrf_exempt(views.search),name='search')
+    path('search/',csrf_exempt(views.search),name='search'),
+    path('login/',views.LoginView.as_view(),name='login'),
+    path('profile/',views.ProfileView.as_view(),name='Profile'),
+    path('accounts/',include('allauth.urls')),
 ]

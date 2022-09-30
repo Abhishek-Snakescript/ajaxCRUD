@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .forms import UserReg
 from .models import UserModel
 import json
+from django.views.generic import TemplateView
 
 # from django.views.decorators.csrf import csrf_exempt
 # Create your views he
@@ -57,3 +58,10 @@ def search(request):
             adress__icontains=search_str)
         data=searching.values()
         return JsonResponse(list(data),safe=False)  
+
+
+class LoginView(TemplateView):
+    template_name="login.html"
+
+class ProfileView(TemplateView):
+    template_name="profile.html"

@@ -14,7 +14,7 @@
 <body>
     <div class="container mt-4">
         {% if user.is_authenticated %}
-            <button class="btn btn-success"><a href="{% url "account_logout" %}">LogOut</a></button>
+            <button class="btn btn-success"><a href="{% url "logout" %}">LogOut</a></button>
         {% else %}
             <button class="btn btn-success"><a href="{% url "login" %}">Login</a></button>
         {% endif %}
@@ -23,6 +23,10 @@
         {% else %}
             <p>Please Login</p>
         {% endif %}
+        {% for m in messages %}
+            <p id="messages">{{m}}</p>
+    
+        {% endfor %}
         
         <h2 class="text-center alert alert-danger">Django with ajax</h2>
         <div class="row">

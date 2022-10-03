@@ -8,7 +8,25 @@
     <title>Login</title>
 </head>
 <body>
-    <button><a href="#" >Login With Facebook</a></button>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="text" name="username" id="username" placeholder='Username'>
+        <br>
+        <br>
+
+        <input type="password" name="password" id="password" placeholder="Password">
+        <br>
+        <br>
+        
+        <input type="submit" value="Submit">
+    </form>
+    <br>
+    {% for m in messages %}
+        <p id="messages">{{m}}</p>
+    
+    {% endfor %}
+    <button><a href="{% url 'reg'%}" >Signup</a></button>
     <button><a href="{% provider_login_url 'google'%}">Login With Google</a></button>
 </body>
+{% include "ajax.html"%}
 </html>

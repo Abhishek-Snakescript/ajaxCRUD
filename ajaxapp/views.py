@@ -1,9 +1,13 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render ,redirect
 from .forms import UserReg
 from .models import UserModel
 import json
 from django.views.generic import TemplateView
+from django.contrib.auth.forms import UserCreationForm
+from .forms import CreateUserForm
+from django.contrib import messages
+from django.contrib.auth import login,logout,authenticate
 
 # from django.views.decorators.csrf import csrf_exempt
 # Create your views he
@@ -60,8 +64,38 @@ def search(request):
         return JsonResponse(list(data),safe=False)  
 
 
-class LoginView(TemplateView):
-    template_name="login.html"
+def Login(request):
+    if request.method=="POST":
+        username=request.POST.get("username")
+        password=request.POST.get("password")
+        user= authenticate(request,username=username,password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('/')
+        else:
+            messages.info(request,"Username or password is incorrect ")
+            return redirect('login')
+    
+    return render(request,'login.html')
+
+def RegForm(request):
+    form=CreateUserForm()
+
+    if request.method=='POST':
+        form=CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Account Created Successfully")
+            return redirect('login')
+    context={"form":form}
+    return render(request,'register.html',context)
+
+
 
 class ProfileView(TemplateView):
     template_name="profile.html"
+
+def logoutuser(request):
+    logout(request)
+    messages.info(request,"you have been logged Out")
+    return redirect("/")

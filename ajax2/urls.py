@@ -26,7 +26,11 @@ urlpatterns = [
     path('delete/',views.delete,name='delete'),
     path('edit/',views.edit,name='edit'),
     path('search/',csrf_exempt(views.search),name='search'),
-    path('login/',views.LoginView.as_view(),name='login'),
+    path('login/',views.Login,name='login'),
     path('profile/',views.ProfileView.as_view(),name='Profile'),
     path('accounts/',include('allauth.urls')),
+    path('verification/', include('verify_email.urls')),
+    path('reg/',views.RegForm,name='reg'),	
+    path('logout/',views.logoutuser,name='logout'),	
+
 ]
